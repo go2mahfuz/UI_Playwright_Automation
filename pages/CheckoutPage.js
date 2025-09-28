@@ -8,14 +8,14 @@ class CheckoutPage {
     this.addressDetailsSection = '#address_delivery';
     this.reviewOrderSection = '#cart_items';
     this.commentTextArea = 'textarea[name="message"]';
-    this.placeOrderBtn = 'button:has-text("Place Order")';
+  this.placeOrderBtn = 'a.btn.check_out:has-text("Place Order")';
     this.nameOnCardInput = 'input[name="name_on_card"]';
     this.cardNumberInput = 'input[name="card_number"]';
     this.cvcInput = 'input[name="cvc"]';
     this.expiryMonthInput = 'input[name="expiry_month"]';
     this.expiryYearInput = 'input[name="expiry_year"]';
     this.payAndConfirmBtn = 'button:has-text("Pay and Confirm Order")';
-    this.orderSuccessMsg = 'text=Your order has been placed successfully!';
+  this.orderSuccessMsg = '[data-qa="order-placed"]';
   }
 
   async clickProceedToCheckout() {
@@ -52,6 +52,8 @@ class CheckoutPage {
 
   async clickPayAndConfirmOrder() {
     await this.page.click(this.payAndConfirmBtn);
+    // Log page content after clicking Pay and Confirm Order
+    console.log('Page content after clicking Pay and Confirm Order:', await this.page.content());
   }
 
   async verifyOrderSuccessVisible() {

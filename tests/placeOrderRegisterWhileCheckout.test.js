@@ -63,6 +63,9 @@ test('Place Order: Register while Checkout', async ({ page }) => {
   await checkoutPage.verifyAddressDetailsVisible();
   await checkoutPage.verifyReviewOrderVisible();
 
+  // Log page content before clicking Place Order
+  console.log('Page content before clicking Place Order:', await page.content());
+
   // 15. Enter description in comment text area and click 'Place Order'
   await checkoutPage.enterComment('Test order description');
   await checkoutPage.clickPlaceOrder();
