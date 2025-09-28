@@ -1,6 +1,6 @@
 // Test temporarily disabled due to failure.
-/*
-const { test } = require('@playwright/test');
+
+const { test, expect } = require('@playwright/test');
 const { HomePage } = require('../pages/HomePage');
 const { ContactPage } = require('../pages/ContactPage');
 
@@ -30,21 +30,20 @@ test('Contact Us Form', async ({ page }, testInfo) => {
   });
 
   // 7. Upload file
-  const filePath = testInfo.outputPath('testfile.txt');
-  await page.context().storageState({ path: filePath }); // Create a dummy file
+  const fs = require('fs');
+  const filePath = 'testfile.txt';
+  fs.writeFileSync(filePath, 'dummy file content');
   await contactPage.uploadFile(filePath);
 
-  // 8. Click 'Submit' button
+  // 8. Set up dialog handler and click 'Submit' button
+  page.once('dialog', dialog => dialog.accept());
   await contactPage.clickSubmit();
 
-  // 9. Click OK button (handle alert)
-  await page.once('dialog', dialog => dialog.accept());
-
   // 10. Verify success message
-  await contactPage.verifySuccessMessageVisible();
+  //console.log('Page content after submission:', await page.content());
+  await expect(page.locator('#contact-page .status')).toBeVisible();
 
   // 11. Click 'Home' button and verify home page
   await contactPage.clickHomeButton();
   await homePage.verifyHomePageVisible();
 });
-*/

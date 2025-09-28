@@ -1,5 +1,5 @@
 // Test temporarily disabled due to failure.
-/*
+
 const { test } = require('@playwright/test');
 const { HomePage } = require('../pages/HomePage');
 const { SignupPage } = require('../pages/SignupPage');
@@ -54,4 +54,3 @@ test('User registration and deletion flow', async ({ page }) => {
   await accountPage.verifyAccountDeletedVisible();
   await accountPage.clickContinue();
 });
-*/
